@@ -35,8 +35,8 @@
 
 ## GitHub Activity
 
-![Aditya's GitHub Stats](https://github-readme-stats.vercel.app/api?username=addyvantage&show_icons=true&theme=radical)  
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=addyvantage&layout=compact&theme=radical)  
+![Aditya's GitHub Stats](https://awesome-github-stats.azurewebsites.net/user-stats/addyvantage?cardType=level&theme=radical)  
+![Top Languages](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=addyvantage&theme=radical)  
 ![Contribution Graph](https://ghchart.rshah.org/addyvantage)
 
 ## What I'm Doing
