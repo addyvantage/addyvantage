@@ -30,13 +30,13 @@
 
 - 🛡️ **[Epistemic Audit Engine](https://github.com/addyvantage/epistemic-audit-engine)** - Claim-level LLM reliability auditing service for long-form outputs. Features claim extraction, evidence retrieval from Wikidata/Wikipedia, verification, and risk aggregation. Includes a FastAPI backend, Next.js UI, deterministic evaluation harness, and append-only logging for internal datasets.  
 - ⚖️ **[FairHire-AI](https://github.com/addyvantage/fairhire-ai)** - Resume intelligence platform analyzing hiring bias. Multi-service architecture with Next.js frontend, FastAPI backend, PostgreSQL/Redis storage, and RQ workers for async jobs. Includes Docker Compose setup, Prometheus metrics, and Grafana dashboards for monitoring.  
-- 🔍 **[DealLens AI](https://github.com/addyvantage/deallens-ai)** - M&A screening platform with API and worker runtime. Monorepo using Next.js, FastAPI, Celery workers, Redis/PostgreSQL. Hardened for production with retries, structured logging, metrics, and health/readiness endpoints.  
-- 📈 **[Dynamic Pricing Decision Simulator](https://github.com/addyvantage/dynamic-pricing-simulator)** - Strategy evaluation platform for pricing under uncertainty. Full simulation runner with Next.js dashboard for comparisons, showing ~4–5% revenue lifts vs. static policies.
+- 🔍 **[DealLens AI](https://github.com/addyvantage/DealLens-AI-MA-Screener)** - M&A screening platform with API and worker runtime. Monorepo using Next.js, FastAPI, Celery workers, Redis/PostgreSQL. Hardened for production with retries, structured logging, metrics, and health/readiness endpoints.  
+- 📈 **[Dynamic Pricing Decision Simulator](https://github.com/addyvantage/dynamic-pricing-decision-simulator)** - Strategy evaluation platform for pricing under uncertainty. Full simulation runner with Next.js dashboard for comparisons, showing \~4–5% revenue lifts vs. static policies.
 
 ## GitHub Activity
 
-![Aditya's GitHub Stats](https://awesome-github-stats.azurewebsites.net/user-stats/addyvantage?cardType=level&theme=radical)  
-![Top Languages](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=addyvantage&theme=radical)  
+![Aditya's GitHub Stats](https://awesome-github-stats.azurewebsites.net/user-stats/addyvantage?cardType=level&theme=radical&cache_seconds=7200)  
+![Top Languages](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=addyvantage&theme=radical&cache_seconds=7200)  
 ![Contribution Graph](https://ghchart.rshah.org/addyvantage)
 
 ## What I'm Doing
