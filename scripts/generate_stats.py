@@ -375,9 +375,11 @@ def draw_stats(user: dict, days: list[tuple[str, int]]) -> None:
         x = i * (bw + gap)
         y0 = base - bh
         op = 0.35 + 0.65 * (value / peak)
+        week_start = days[i * 7][0] if i * 7 < len(days) else ""
         p.append(
             f'<rect x="{x:.2f}" y="{y0:.2f}" width="{bw:.2f}" height="{bh:.2f}" '
             f'rx="1" opacity="{op:.2f}">'
+            f'<title>{value} contributions · week of {pretty(week_start)}</title>'
             # Grow once and freeze. No loop — a README that pulses forever is
             # a README nobody finishes reading.
             f'<animate attributeName="height" from="0" to="{bh:.2f}" '
@@ -452,6 +454,7 @@ def draw_langs(by_bytes: list[tuple[str, int]], by_repo: list[tuple[str, int]]) 
             p.append(
                 f'<rect x="{x0 + 130:.1f}" y="{y:.1f}" width="{bw:.1f}" height="12" rx="1" '
                 f'class="bar" opacity="{0.95 - i * 0.13:.2f}">'
+                f'<title>{name}: {value:,} {"bytes" if suffix == "%" else "repositories"}</title>'
                 f'<animate attributeName="width" from="0" to="{bw:.1f}" '
                 f'begin="{i * 0.07:.2f}s" dur="0.55s" fill="freeze"/></rect>'
             )
@@ -554,6 +557,10 @@ def draw_year(days: list[tuple[str, int]]) -> None:
                 continue
             x, y = left + wi * cell, top + row * cell
             lvl = level(count)
+            # A title element gives a native browser tooltip on hover — the one
+            # piece of interactivity an <img>-loaded SVG still can't deliver,
+            # but it costs nothing and works the moment anyone opens the file
+            # directly or the SVG is inlined.
             p.append(
                 f'<rect x="{x:.1f}" y="{y:.1f}" width="{box}" height="{box}" '
                 f'rx="{radius}" opacity="{OPACITY[lvl]}">'

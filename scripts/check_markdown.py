@@ -79,6 +79,17 @@ def main() -> int:
 
     imgs = len(re.findall(r"<img", html))
     print(f"· GitHub rendered {imgs} images, {len(html)} bytes of HTML")
+
+    # The hover affordances are the fragile part: `title` is the only one that
+    # survives the sanitiser, and only the renderer can confirm it. If this
+    # line says stripped, the tooltips are gone and nothing else will tell you.
+    src_titles = len(re.findall(r"<img[^>]*\stitle=", source))
+    out_titles = len(re.findall(r"<img[^>]*\stitle=", html))
+    if src_titles:
+        verdict = "kept" if out_titles >= src_titles else f"STRIPPED ({out_titles}/{src_titles} left)"
+        print(f"· title= on <img>: {verdict}")
+    anchors = len(re.findall(r"<a [^>]*href", html))
+    print(f"· {anchors} links survived")
     for token in ("<style", "class=\"custom", "<font"):
         if token in source and token not in html:
             print(f"  confirmed stripped by the renderer: {token}")

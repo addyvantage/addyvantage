@@ -141,6 +141,20 @@ of your maximum. One 40-commit afternoon would otherwise push every ordinary
 day into the faintest level and the year would describe an outlier instead of
 a habit. The legend prints the actual thresholds.
 
+**Hover is mostly not available, and it's worth knowing why.** GitHub strips
+inline `<svg>` from markdown, so every graphic loads through an `<img>` tag —
+and an image document receives no pointer events. CSS `:hover`, SMIL with
+`begin="mouseover"`, `<a>` inside the SVG, and the per-element `<title>`
+tooltips all go inert there. What survives the sanitiser is `title=` on the
+`<img>` itself and an `<a>` wrapper, which is what the README uses: one
+tooltip per graphic, and a cursor that changes.
+
+The per-element `<title>` elements are still generated — 366 of them in
+`year.svg` — because they cost nothing and they *do* work the moment anyone
+opens the SVG directly, which the calendar's link does. Run
+`check_markdown.py` after any README edit: it now reports whether `title=`
+survived the renderer, and nothing else will tell you if it stops.
+
 **Mermaid blocks are rendered by GitHub itself**, client-side, and follow the
 site's theme. They cost nothing and touch no third party — but they only
 render on GitHub, so they'll show as plain code if the README is mirrored

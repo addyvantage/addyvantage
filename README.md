@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="portrait-dark.svg">
-  <img src="portrait-light.svg" width="600" alt="ASCII portrait of Aditya Singh, typing itself out">
+  <img src="portrait-light.svg" width="600" title="Drawn from a photograph by scripts/portrait.py — 130 columns, 78 rows, typed out in SMIL" alt="ASCII portrait of Aditya Singh, typing itself out">
 </picture>
 
 </div>
@@ -125,18 +125,21 @@ pricing in simulation.
 
 <img src="assets/headings/hd-signals.svg" width="860" alt="signals">
 
-<img src="stats.svg" width="860" alt="Contribution totals and weekly volume">
+<a href="https://github.com/addyvantage?tab=overview" title="Contributions over the last 365 days — regenerated daily from the GitHub GraphQL API">
+  <img src="stats.svg" width="860" alt="Contribution totals and weekly volume">
+</a>
 
-<img src="streak.svg" width="860" alt="Current and longest contribution streaks">
+<a href="https://github.com/addyvantage?tab=repositories" title="Streaks measured on whole UTC days; today is not counted against a streak until it ends">
+  <img src="streak.svg" width="860" alt="Current and longest contribution streaks">
+</a>
 
 <img src="assets/headings/hd-the-year.svg" width="860" alt="the year">
 
-<img src="year.svg" width="860" alt="The last 365 days, one character per day">
+<a href="year.svg" title="Every day of the last year. Intensity levels are quartiles of my own active days, not fractions of the maximum — open the SVG for per-day tooltips">
+  <img src="year.svg" width="860" alt="Contribution calendar for the last 365 days">
+</a>
 
 <img src="assets/headings/hd-now.svg" width="860" alt="now">
-
-> [!NOTE]
-> Everything in this section is written by a scheduled job, not by me. If it's stale, the workflow broke.
 
 **Where the commits are actually landing** — the three repositories I touched most recently.
 
@@ -160,7 +163,9 @@ pricing in simulation.
 
 <img src="assets/headings/hd-languages.svg" width="860" alt="languages">
 
-<img src="langs.svg" width="860" alt="Language distribution by bytes and by repository">
+<a href="https://github.com/addyvantage?tab=repositories&language=python" title="Bytes of code across my 30 most recently pushed public repos, and how many repos lead with each language">
+  <img src="langs.svg" width="860" alt="Language distribution by bytes and by repository">
+</a>
 
 <img src="assets/headings/hd-elsewhere.svg" width="860" alt="elsewhere">
 
