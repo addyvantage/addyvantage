@@ -136,6 +136,16 @@ and the REST call needs a scope your CLI token won't have. Both stay manual.
 button will show nothing. If you'd rather keep it, use real `##` headings and
 drop `generate_headings.py`.
 
+**The calendar's levels are quartiles of your own active days**, not fractions
+of your maximum. One 40-commit afternoon would otherwise push every ordinary
+day into the faintest level and the year would describe an outlier instead of
+a habit. The legend prints the actual thresholds.
+
+**Mermaid blocks are rendered by GitHub itself**, client-side, and follow the
+site's theme. They cost nothing and touch no third party — but they only
+render on GitHub, so they'll show as plain code if the README is mirrored
+anywhere else.
+
 **Nightly commits are normal.** The window is a rolling 365 days, so the year
 grid shifts one column every day and the file legitimately changes. What the
 whole-day pinning prevents is two runs *on the same day* disagreeing.

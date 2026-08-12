@@ -39,6 +39,18 @@ The hard part isn't the checking, it's making the checking reproducible: a
 deterministic eval harness and an append-only audit log, because a reliability
 score you can't reproduce is just a vibe.
 
+```mermaid
+flowchart LR
+    A["Long-form<br/>LLM output"] --> B["Claim<br/>extraction"]
+    B --> C["Atomic claims"]
+    C --> D["Evidence retrieval<br/>Wikidata · Wikipedia"]
+    D --> E["Per-claim<br/>verification"]
+    E --> F["Risk<br/>aggregation"]
+    F --> G["Scored audit<br/>+ append-only log"]
+    E -.->|"no evidence found"| H["Flagged as<br/>unverifiable"]
+    H --> F
+```
+
 <samp>FastAPI · Next.js · retrieval · deterministic eval harness</samp> &nbsp;
 [**repo →**](https://github.com/addyvantage/Epistemic-Audit-Engine)
 
@@ -56,6 +68,23 @@ never becomes a nine-second API response.
 
 Instrumented end to end — if a worker is falling behind, the dashboard says so
 before a user does.
+
+```mermaid
+sequenceDiagram
+    participant U as Client
+    participant A as FastAPI
+    participant Q as Redis queue
+    participant W as RQ worker
+    U->>A: POST /analyze
+    A->>Q: enqueue job
+    A-->>U: 202 + job id
+    Note over A,U: request path never waits on the model
+    Q->>W: dequeue
+    W->>W: parse · LLM · bias scoring
+    W->>Q: store result
+    U->>A: GET /jobs/{id}
+    A-->>U: result
+```
 
 <samp>FastAPI · RQ workers · PostgreSQL · Redis · Prometheus + Grafana</samp> &nbsp;
 [**repo →**](https://github.com/addyvantage/fairhire-ai)
@@ -106,6 +135,9 @@ pricing in simulation.
 
 <img src="assets/headings/hd-now.svg" width="860" alt="now">
 
+> [!NOTE]
+> Everything in this section is written by a scheduled job, not by me. If it's stale, the workflow broke.
+
 **Where the commits are actually landing** — the three repositories I touched most recently.
 
 <!-- AUTOGEN:focus:start -->
@@ -120,6 +152,7 @@ pricing in simulation.
 <br>
 
 <!-- AUTOGEN:activity:start -->
+- opened issue [#44823](https://github.com/timburgan/timburgan/issues/44823) in [`timburgan/timburgan`](https://github.com/timburgan/timburgan) · today
 - pushed to [`addyvantage/addyvantage`](https://github.com/addyvantage/addyvantage) · today
 <!-- AUTOGEN:activity:end -->
 

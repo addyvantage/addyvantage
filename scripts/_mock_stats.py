@@ -17,13 +17,15 @@ cur = []
 total = 0
 while day <= today:
     # Bursty: quiet stretches punctuated by multi-day pushes, like real work.
-    if streak_left == 0 and random.random() < 0.18:
-        streak_left = random.randint(2, 9)
+    months_in = (day - start).days / 365.0
+    busy = 0.12 + 0.55 * max(0.0, (months_in - 0.45) / 0.55)   # ramps up after ~Feb
+    if streak_left == 0 and random.random() < busy:
+        streak_left = random.randint(2, 8)
     if streak_left > 0:
-        count = random.randint(1, 17)
+        count = random.randint(1, 14)
         streak_left -= 1
     else:
-        count = 0 if random.random() < 0.62 else random.randint(1, 4)
+        count = 0 if random.random() < 0.80 else random.randint(1, 3)
     total += count
     cur.append({"date": day.isoformat(), "contributionCount": count, "weekday": (day.weekday() + 1) % 7})
     if len(cur) == 7:

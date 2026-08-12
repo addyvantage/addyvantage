@@ -471,26 +471,18 @@ def draw_langs(by_bytes: list[tuple[str, int]], by_repo: list[tuple[str, int]]) 
 # --------------------------------------------------------------------------- #
 def draw_year(days: list[tuple[str, int]]) -> None:
     """
-    One character per day, on the portrait's ramp.
+    The last 365 days as a square grid, five intensity levels.
 
-    Two things this has to get right, both learned the hard way:
-
-    · The cell must match the glyph. A monospace advance is 0.600em, so a
-      12px font in a 14px cell leaves every character hugging the left of a
-      double-wide box and the calendar reads as scattered dust. cell_w is
-      derived from size here rather than picked.
-    · Empty days need a mark. Drawing nothing for a zero-contribution day
-      removes the grid the eye reads position against, so a quiet autumn
-      looks like a rendering failure rather than a quiet autumn.
-
-    Every glyph is positioned explicitly via an x-list rather than relying on
-    the font's advance width, so the grid is exact even on a machine that
-    falls back to Consolas (0.55em) instead of the 0.600em assumed here.
+    Thresholds are quartiles of *this* profile's active days, not fractions of
+    the maximum. One 40-commit afternoon would otherwise push every ordinary
+    day into level 1 and flatten the whole year — the graphic would say more
+    about a single outlier than about the habit.
     """
-    size = 15
-    cell_w = size * 0.600 * 1.10      # 10% air, no more
-    cell_h = 16.0
-    left, top = 30.0, 40.0
+    # 11.5 rather than GitHub's ~13 pitch: at 13 the 53-week grid runs to
+    # 721px and pushes the side panel past the width guard, which drops it
+    # silently. The squares stay legible; the panel is worth more than 1.5px.
+    cell, box, radius = 11.5, 9.5, 2.0
+    left, top = 32.0, 40.0
 
     weeks: list[list[tuple[str, int]]] = []
     first_weekday = datetime.strptime(days[0][0], "%Y-%m-%d").weekday()
@@ -504,22 +496,35 @@ def draw_year(days: list[tuple[str, int]]) -> None:
     if week:
         weeks.append(week + [("", -1)] * (7 - len(week)))
 
-    grid_right = left + len(weeks) * cell_w
-    w = WIDTH
-    h = int(top + 7 * cell_h + 34)
-    counts = sorted(c for _, c in days if c > 0)
-    fonts = inline_font("mono-regular.woff2", "JetBrains Mono", 400)
-    p = svg_open(w, h, "Contribution calendar, one character per day", fonts=fonts)
+    active = sorted(c for _, c in days if c > 0)
 
-    def glyph(count: int) -> str:
+    def cut(frac: float) -> int:
+        return active[min(int(len(active) * frac), len(active) - 1)] if active else 1
+
+    t1, t2, t3 = cut(0.25), cut(0.55), cut(0.80)
+
+    def level(count: int) -> int:
         if count <= 0:
-            return " "
-        # Rank against the distribution rather than the maximum: one 40-commit
-        # day would otherwise flatten every ordinary day onto the same glyph.
-        rank = sum(1 for c in counts if c <= count) / len(counts)
-        return RAMP[min(1 + int(rank * (len(RAMP) - 2)), len(RAMP) - 1)]
+            return 0
+        if count <= t1:
+            return 1
+        if count <= t2:
+            return 2
+        if count <= t3:
+            return 3
+        return 4
 
-    # Month ticks, at the first week that contains that month's opening days.
+    # Opacity steps rather than five different colours: one accent, five
+    # weights. Level 0 keeps a faint tile so the grid still reads as a grid
+    # through a quiet autumn instead of looking like a failed render.
+    OPACITY = {0: 0.07, 1: 0.30, 2: 0.52, 3: 0.76, 4: 1.0}
+
+    grid_right = left + len(weeks) * cell
+    h = int(top + 7 * cell + 40)
+    fonts = inline_font("mono-regular.woff2", "JetBrains Mono", 400)
+    p = svg_open(WIDTH, h, "Contribution calendar for the last 365 days", fonts=fonts)
+
+    # Month ticks at the first week containing that month's opening days.
     seen = set()
     for wi, wk in enumerate(weeks):
         for date, _ in wk:
@@ -530,68 +535,78 @@ def draw_year(days: list[tuple[str, int]]) -> None:
             if dt.day <= 7 and key not in seen:
                 seen.add(key)
                 p.append(
-                    f'<text x="{left + wi * cell_w:.1f}" y="{top - 14}" class="muted" '
+                    f'<text x="{left + wi * cell:.1f}" y="{top - 12}" class="muted" '
                     f'font-size="9" letter-spacing="1">{dt.strftime("%b").upper()}</text>'
                 )
             break
 
     names = {1: "Mon", 3: "Wed", 5: "Fri"}
-    for row in range(7):
-        xs, active, empty = [], [], []
-        for wi, wk in enumerate(weeks):
-            date, count = wk[row]
-            xs.append(f"{left + wi * cell_w:.1f}")
-            g = glyph(count) if date else " "
-            active.append(g)
-            # The faint layer carries every day the ramp layer left blank, so
-            # the seven rows stay legible as rows.
-            empty.append("\u00b7" if (date and count <= 0) else " ")
-        y = top + row * cell_h
-        xlist = " ".join(xs)
-        if row in names:
-            p.append(
-                f'<text x="0" y="{y:.1f}" class="muted" font-size="9">{names[row]}</text>'
-            )
+    for row, label_text in names.items():
         p.append(
-            f'<text x="{xlist}" y="{y:.1f}" class="muted" font-size="{size}" '
-            f'opacity="0.28" xml:space="preserve">{escape("".join(empty))}</text>'
-        )
-        p.append(
-            f'<text x="{xlist}" y="{y:.1f}" class="accent" font-size="{size}" '
-            f'xml:space="preserve">{escape("".join(active))}</text>'
+            f'<text x="0" y="{top + row * cell + box - 2:.1f}" class="muted" '
+            f'font-size="9">{label_text}</text>'
         )
 
-    # Right-hand panel: the three facts a calendar makes you squint to find.
-    active_days = [(d, c) for d, c in days if c > 0]
+    p.append('<g class="bar">')
+    for wi, wk in enumerate(weeks):
+        for row, (date, count) in enumerate(wk):
+            if not date:
+                continue
+            x, y = left + wi * cell, top + row * cell
+            lvl = level(count)
+            p.append(
+                f'<rect x="{x:.1f}" y="{y:.1f}" width="{box}" height="{box}" '
+                f'rx="{radius}" opacity="{OPACITY[lvl]}">'
+                f"<title>{count} on {pretty(date)}</title></rect>"
+            )
+    p.append("</g>")
+
+    # Right-hand panel: what a square grid alone makes you squint to work out.
     busiest = max(days, key=lambda dc: dc[1])
     quiet_run = run = 0
     for _, c in days:
         run = run + 1 if c == 0 else 0
         quiet_run = max(quiet_run, run)
-    median = sorted(c for _, c in active_days)[len(active_days) // 2] if active_days else 0
+    median = active[len(active) // 2] if active else 0
 
     px = grid_right + 34
     if px < W - 150:
-        rows = [
+        p.append(
+            f'<line x1="{px - 18:.0f}" y1="{top - 24:.0f}" x2="{px - 18:.0f}" '
+            f'y2="{top + 7 * cell - 4:.0f}" class="rule" stroke-width="1"/>'
+        )
+        yy = top - 12
+        for cap, val in [
             ("busiest day", f"{busiest[1]} on {pretty(busiest[0])[:6]}"),
             ("typical active day", f"{median} contributions"),
             ("longest quiet run", f"{quiet_run} days"),
-        ]
-        p.append(
-            f'<line x1="{px - 18:.0f}" y1="{top - 26:.0f}" x2="{px - 18:.0f}" '
-            f'y2="{top + 7 * cell_h - 4:.0f}" class="rule" stroke-width="1"/>'
-        )
-        yy = top - 14
-        for cap, val in rows:
+        ]:
             p.append(label(px, yy, cap))
             p.append(text(px, yy + 17, val, cls="ink", size=12))
-            yy += 38
+            yy += 36
 
+    # Legend, with the thresholds spelled out. A key that says "Less → More"
+    # without numbers is decoration; this one tells you what a dark square cost.
+    ly = top + 7 * cell + 22
+    p.append(text(left, ly + box - 3, "less", cls="muted", size=9))
+    lx = left + 34
+    p.append('<g class="bar">')
+    for lvl in range(5):
+        p.append(
+            f'<rect x="{lx:.1f}" y="{ly:.1f}" width="{box}" height="{box}" '
+            f'rx="{radius}" opacity="{OPACITY[lvl]}"/>'
+        )
+        lx += cell
+    p.append("</g>")
+    p.append(text(lx + 4, ly + box - 3, "more", cls="muted", size=9))
     p.append(
-        f'<text x="{left}" y="{h - 10}" class="muted" font-size="9" '
-        f'xml:space="preserve">quiet<tspan class="accent" font-size="11" '
-        f'letter-spacing="3" dx="10">{escape(RAMP[1:])}</tspan>'
-        f'<tspan class="muted" font-size="9" dx="4">loud</tspan></text>'
+        text(
+            lx + 46,
+            ly + box - 3,
+            f"levels at 1, {t1 + 1}, {t2 + 1}, {t3 + 1}+ contributions",
+            cls="muted",
+            size=9,
+        )
     )
     write("year.svg", p)
 
