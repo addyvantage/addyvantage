@@ -25,6 +25,7 @@ from __future__ import annotations
 import base64
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -94,6 +95,7 @@ query($login: String!, $from: DateTime!, $to: DateTime!) {
       totalCount
       nodes {
         name
+        description
         stargazerCount
         forkCount
         primaryLanguage { name }
@@ -595,6 +597,115 @@ def draw_year(days: list[tuple[str, int]]) -> None:
 
 
 # --------------------------------------------------------------------------- #
+# The README's own text
+#
+# The graphics are only half of it. These blocks make the prose live too, so
+# the page reports what actually happened this week instead of what was true
+# the day it was written.
+# --------------------------------------------------------------------------- #
+def fetch_events() -> list[dict]:
+    req = urllib.request.Request(
+        f"https://api.github.com/users/{LOGIN}/events/public?per_page=100",
+        headers={
+            "Authorization": f"Bearer {TOKEN}",
+            "Accept": "application/vnd.github+json",
+            "User-Agent": f"{LOGIN}-profile-generator",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = json.loads(resp.read().decode())
+        return data if isinstance(data, list) else []
+    except (urllib.error.HTTPError, urllib.error.URLError) as exc:
+        print(f"  ! events unavailable ({exc})")
+        return []
+
+
+def ago(when: str) -> str:
+    try:
+        dt = datetime.strptime(when, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    except ValueError:
+        return ""
+    days = max((datetime.now(timezone.utc) - dt).days, 0)
+    return " · today" if days == 0 else " · yesterday" if days == 1 else f" · {days}d ago"
+
+
+def render_activity(events: list[dict], limit: int = 6) -> str:
+    lines, seen = [], set()
+    for ev in events:
+        if len(lines) >= limit:
+            break
+        kind, repo = ev.get("type"), (ev.get("repo") or {}).get("name", "")
+        pl = ev.get("payload") or {}
+        if not repo or (kind, repo) in seen:
+            continue
+        link = f"[`{repo}`](https://github.com/{repo})"
+        if kind == "PushEvent":
+            n = pl.get("size", 0) or len(pl.get("commits", []))
+            what = (
+                f"pushed **{n}** commit{'s' if n != 1 else ''} to {link}"
+                if n
+                else f"pushed to {link}"
+            )
+        elif kind == "PullRequestEvent":
+            pr = pl.get("pull_request") or {}
+            act = "merged" if pl.get("action") == "closed" and pr.get("merged") else pl.get("action", "opened")
+            num = pr.get("number", "")
+            what = f"{act} PR [#{num}](https://github.com/{repo}/pull/{num}) in {link}"
+        elif kind == "CreateEvent" and pl.get("ref_type") == "repository":
+            what = f"started {link}"
+        elif kind == "ReleaseEvent":
+            what = f"released `{(pl.get('release') or {}).get('tag_name', '')}` of {link}"
+        elif kind == "IssuesEvent" and pl.get("action") == "opened":
+            num = (pl.get("issue") or {}).get("number", "")
+            what = f"opened issue [#{num}](https://github.com/{repo}/issues/{num}) in {link}"
+        else:
+            continue
+        seen.add((kind, repo))
+        lines.append(f"- {what}{ago(ev.get('created_at', ''))}")
+    return "\n".join(lines) or "- Quiet week — heads down on something that isn't public yet."
+
+
+def render_focus(repos: list[dict]) -> str:
+    """The three repos touched most recently, in the order they were touched."""
+    rows = []
+    for repo in repos[:3]:
+        desc = (repo.get("description") or "").strip()
+        if len(desc) > 96:
+            desc = desc[:93].rsplit(" ", 1)[0] + "…"
+        lang = (repo.get("primaryLanguage") or {}).get("name", "")
+        meta = " · ".join(x for x in (lang, f"{repo['stargazerCount']}★") if x)
+        rows.append(
+            f"- **[{repo['name']}](https://github.com/{LOGIN}/{repo['name']})**"
+            + (f" — {desc}" if desc else "")
+            + (f"  <samp>{meta}</samp>" if meta else "")
+        )
+    return "\n".join(rows)
+
+
+def splice_readme(blocks: dict[str, str], path: str = "README.md") -> None:
+    if not os.path.exists(path):
+        print(f"  ! {path} not found, skipping prose")
+        return
+    with open(path, encoding="utf-8") as fh:
+        original = fh.read()
+    updated = original
+    for name, body in blocks.items():
+        start, end = f"<!-- AUTOGEN:{name}:start -->", f"<!-- AUTOGEN:{name}:end -->"
+        pattern = re.compile(re.escape(start) + r".*?" + re.escape(end), re.DOTALL)
+        if not pattern.search(updated):
+            print(f"  ! marker {name!r} missing")
+            continue
+        updated = pattern.sub(f"{start}\n{body}\n{end}", updated, count=1)
+    if updated == original:
+        print("  = README.md unchanged")
+        return
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write(updated)
+    print("  → README.md")
+
+
+# --------------------------------------------------------------------------- #
 def main() -> int:
     user = fetch()
     days = days_from(user)
@@ -605,6 +716,13 @@ def main() -> int:
     by_bytes, by_repo = language_stats(user["repositories"]["nodes"])
     draw_langs(by_bytes, by_repo)
     draw_year(days)
+
+    splice_readme(
+        {
+            "activity": render_activity(fetch_events()),
+            "focus": render_focus(user["repositories"]["nodes"]),
+        }
+    )
     return 0
 
 

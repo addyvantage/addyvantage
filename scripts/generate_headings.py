@@ -34,6 +34,7 @@ SECTIONS = [
     "building",
     "signals",
     "the year",
+    "now",
     "languages",
     "elsewhere",
 ]
