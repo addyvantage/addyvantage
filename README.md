@@ -1,74 +1,158 @@
-# Hi, I'm Aditya 👋
+<div align="center">
 
-📍 **New Delhi, India** | 🤖 **Applied AI Systems Engineer & GenAI Reliability Specialist** | 🚀 **Data Science Enthusiast**
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=24&pause=1200&color=6EE7B7&center=true&vCenter=true&width=760&lines=Applied+AI+Systems+Engineer;I+build+GenAI+that+can+be+audited%2C+not+just+demoed;Reliability+first+%E2%80%94+trust+is+the+ultimate+metric" alt="Aditya Singh" />
 
-![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![SQL](https://img.shields.io/badge/-SQL-4479A1?style=flat-square&logo=postgresql&logoColor=white)
-![FastAPI](https://img.shields.io/badge/-FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
-![Next.js](https://img.shields.io/badge/-Next.js-000000?style=flat-square&logo=next.js&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
-![Redis](https://img.shields.io/badge/-Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
-![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Grafana](https://img.shields.io/badge/-Grafana-F46800?style=flat-square&logo=grafana&logoColor=white)
-![RAG](https://img.shields.io/badge/-RAG-FF6F61?style=flat-square&logo=ai&logoColor=white)
-![LLM](https://img.shields.io/badge/-LLM-6A1B9A?style=flat-square&logo=openai&logoColor=white)
+<br/>
 
-> Passionate about building robust AI infrastructure for reliable GenAI applications. From hallucination auditing to bias-free hiring platforms, I engineer systems that scale with integrity. Currently in my final year at KIIT, pushing the boundaries of applied AI.
+`New Delhi, India` · `B.Tech CS @ KIIT '26` · `LLM reliability · retrieval · backend systems`
 
-## Education & Experience
+<br/>
 
-- **Kalinga Institute of Industrial Technology (KIIT)** | B.Tech in Computer Science & Systems Engineering | 2022–2026  
-- **Data Analytics Intern** | National University of Singapore | Jun–Jul 2025  
-  - Conducted EDA on 10k+ Airbnb records, boosting prediction accuracy by 12%.  
-  - Automated Python workflows, reducing errors by 20–25%.  
-  - Deployed Power BI dashboards for efficient analysis.  
-- **Data Science Intern** | Sukrit Technologies Pvt. Ltd. | 2025  
-  - Developed SQL-based analytics and automated reporting pipelines.
+<a href="https://linkedin.com/in/YOUR-HANDLE"><img src="https://img.shields.io/badge/LinkedIn-0D1117?style=for-the-badge&logo=linkedin&logoColor=0A66C2&labelColor=0D1117" alt="LinkedIn"/></a>
+<a href="mailto:YOUR@EMAIL.COM"><img src="https://img.shields.io/badge/Email-0D1117?style=for-the-badge&logo=gmail&logoColor=EA4335&labelColor=0D1117" alt="Email"/></a>
+<a href="https://github.com/addyvantage?tab=followers"><img src="https://img.shields.io/github/followers/addyvantage?style=for-the-badge&logo=github&logoColor=E6EDF3&color=0D1117&labelColor=0D1117&label=Follow" alt="Follow"/></a>
 
-## Current Projects
-
-- 🛡️ **[Epistemic Audit Engine](https://github.com/addyvantage/epistemic-audit-engine)** - Claim-level LLM reliability auditing service for long-form outputs. Features claim extraction, evidence retrieval from Wikidata/Wikipedia, verification, and risk aggregation. Includes a FastAPI backend, Next.js UI, deterministic evaluation harness, and append-only logging for internal datasets.  
-- ⚖️ **[FairHire-AI](https://github.com/addyvantage/fairhire-ai)** - Resume intelligence platform analyzing hiring bias. Multi-service architecture with Next.js frontend, FastAPI backend, PostgreSQL/Redis storage, and RQ workers for async jobs. Includes Docker Compose setup, Prometheus metrics, and Grafana dashboards for monitoring.  
-- 🔍 **[DealLens AI](https://github.com/addyvantage/DealLens-AI-MA-Screener)** - M&A screening platform with API and worker runtime. Monorepo using Next.js, FastAPI, Celery workers, Redis/PostgreSQL. Hardened for production with retries, structured logging, metrics, and health/readiness endpoints.  
-- 📈 **[Dynamic Pricing Decision Simulator](https://github.com/addyvantage/dynamic-pricing-decision-simulator)** - Strategy evaluation platform for pricing under uncertainty. Full simulation runner with Next.js dashboard for comparisons, showing \~4–5% revenue lifts vs. static policies.
-
-## GitHub Activity
-
-![Aditya's GitHub Stats](https://awesome-github-stats.azurewebsites.net/user-stats/addyvantage?cardType=level&theme=radical&cache_seconds=7200)  
-![Top Languages](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=addyvantage&theme=radical&cache_seconds=7200)  
-![Contribution Graph](https://ghchart.rshah.org/addyvantage)
-
-## What I'm Doing
-
-- **Engineering AI Reliability** - Developing tools for GenAI auditing, bias detection, and scalable infrastructure.  
-- **Internship Insights** - Applying data analytics and ML from NUS and Sukrit to real-world projects.  
-- **Rapid Prototyping** - Building full-stack AI systems with FastAPI, Next.js, and containerized deployments.  
-- **Learning & Contributing** - Exploring RAG, embeddings, vector retrieval, and observability in AI workflows.
-
-## Connect
-
-[![Twitter](https://img.shields.io/badge/-@addyvantage-1DA1F2?style=flat-square&logo=twitter&logoColor=white)](https://twitter.com/addyvantage)
-[![LinkedIn](https://img.shields.io/badge/-Aditya_Singh-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/addyvantage)
-[![Email](https://img.shields.io/badge/-Email-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:adityasingh0929@gmail.com)
-[![GitHub](https://img.shields.io/badge/-Follow-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/addyvantage)
+</div>
 
 ---
 
-### Recognition
+## `whoami`
 
-- **NUS Internship Achievements** - Improved model accuracy by 12% and reduced defects by 25% through feature engineering and automation.  
-- **KIIT B.Tech Project Highlights** - Focused on AI systems engineering with emphasis on reliability and scalability.  
-- **Open Source Contributions** - Building production-grade AI tools with modern stacks for community use.
+I work on the unglamorous half of GenAI: the part that decides whether an output can be trusted, traced, and shipped. Claim-level verification, evidence linkage, bias auditing, async workloads that don't fall over — the systems around the model rather than the model itself.
 
-### Philosophy
+<!-- AUTOGEN:identity:start -->
+```yaml
+name:      Aditya Singh
+role:      Applied AI Systems Engineer
+focus:     [ LLM reliability, retrieval & evidence grounding, backend systems ]
+studying:  B.Tech Computer Science & Systems Engineering, KIIT (2022–2026)
+worked_at: [ National University of Singapore, Sukrit Technologies ]
+shipping:  Epistemic-Audit-Engine
+stack:     [ Python, TypeScript, FastAPI, Next.js, PostgreSQL, Redis, Docker ]
+```
+<!-- AUTOGEN:identity:end -->
 
-> "Reliability first in AI – because trust is the ultimate metric." I focus on systems that not only perform but verify, audit, and scale ethically.
+---
 
-**Summary:**
-Random Facts
+## Currently building
 
-- Final-year student balancing academics with hands-on AI internships.  
-- Powered by coffee and code marathons.  
-- Enthusiast for ethical AI and bias mitigation.  
-- Always experimenting with new tools like Celery, RQ, and Grafana.
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### 🛡️ [Epistemic Audit Engine](https://github.com/addyvantage/Epistemic-Audit-Engine)
+Claim-level reliability auditing for long-form LLM output. Extracts atomic claims, retrieves evidence from Wikidata/Wikipedia, verifies, then aggregates into a risk score.
+
+`FastAPI` `Next.js` `deterministic eval harness` `append-only audit log`
+
+</td>
+<td width="50%" valign="top">
+
+### ⚖️ [FairHire-AI](https://github.com/addyvantage/fairhire-ai)
+Resume intelligence platform that surfaces hiring bias. LLM document processing is decoupled from the request path so the API stays fast under load.
+
+`FastAPI` `RQ workers` `PostgreSQL` `Redis` `Prometheus + Grafana`
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### 🔍 [DealLens AI](https://github.com/addyvantage/DealLens-AI-MA-Screener)
+M&A deal screener automating IB workflows — financial ratio screening, NLP over news and filings, synergy detection, backtesting.
+
+`Monorepo` `Celery` `structured logging` `health/readiness probes`
+
+</td>
+<td width="50%" valign="top">
+
+### 📈 [Dynamic Pricing Simulator](https://github.com/addyvantage/dynamic-pricing-decision-simulator)
+Decision-support system for pricing under demand uncertainty and capacity constraints. Benchmarks policies against static baselines — ~4–5% revenue lift.
+
+`Simulation runner` `policy benchmarking` `Next.js exec dashboard`
+
+</td>
+</tr>
+</table>
+
+---
+
+## Stack
+
+<div align="center">
+
+**Languages**
+
+<img src="https://skillicons.dev/icons?i=python,ts,js,cpp,postgres&theme=dark" alt="languages"/>
+
+**AI / Data**
+
+<img src="https://skillicons.dev/icons?i=pytorch,sklearn,anaconda&theme=dark" alt="ai"/>
+<img src="https://img.shields.io/badge/RAG-0D1117?style=for-the-badge&logoColor=6EE7B7&labelColor=0D1117&color=0D1117" alt="RAG"/>
+<img src="https://img.shields.io/badge/Embeddings-0D1117?style=for-the-badge&labelColor=0D1117&color=0D1117" alt="Embeddings"/>
+<img src="https://img.shields.io/badge/Vector_Search-0D1117?style=for-the-badge&labelColor=0D1117&color=0D1117" alt="Vector Search"/>
+
+**Backend & Infra**
+
+<img src="https://skillicons.dev/icons?i=fastapi,nextjs,react,redis,docker,githubactions,grafana,prometheus,linux&theme=dark" alt="infra"/>
+
+</div>
+
+---
+
+## Signals
+
+<!-- AUTOGEN:stats:start -->
+```
+repositories   ·  loading on next run
+stars earned   ·  loading on next run
+contributions  ·  loading on next run
+```
+<!-- AUTOGEN:stats:end -->
+
+<!-- AUTOGEN:languages:start -->
+```text
+Language breakdown regenerates on the next scheduled run.
+```
+<!-- AUTOGEN:languages:end -->
+
+<div align="center">
+<img height="160" src="https://github-readme-stats.vercel.app/api?username=addyvantage&show_icons=true&hide_border=true&bg_color=0D1117&title_color=6EE7B7&icon_color=6EE7B7&text_color=C9D1D9&include_all_commits=true&hide=issues" alt="stats"/>
+<img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=addyvantage&layout=compact&hide_border=true&bg_color=0D1117&title_color=6EE7B7&text_color=C9D1D9&langs_count=6" alt="top languages"/>
+</div>
+
+---
+
+## Latest commits to the record
+
+<!-- AUTOGEN:activity:start -->
+- Activity feed regenerates on the next scheduled run.
+<!-- AUTOGEN:activity:end -->
+
+---
+
+## Notes to self
+
+> Reliability first in AI — because trust is the ultimate metric.
+> Build systems that don't just perform, but verify, audit, and scale honestly.
+
+- A benchmark you can't reproduce is a screenshot.
+- Every number in a README should be generated, not remembered.
+- The interesting failures happen in the plumbing, not the model.
+
+---
+
+<div align="center">
+
+<sub>
+
+**This README rewrites itself.**
+A [GitHub Action](.github/workflows/readme.yml) runs [`scripts/generate_readme.py`](scripts/generate_readme.py) daily against the GitHub API and rewrites every block between the `AUTOGEN` markers. Nothing above is hand-typed trivia.
+
+</sub>
+
+<!-- AUTOGEN:updated:start -->
+<sub>`last regenerated · pending first run`</sub>
+<!-- AUTOGEN:updated:end -->
+
+</div>
