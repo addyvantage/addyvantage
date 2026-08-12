@@ -138,30 +138,3 @@ pricing in simulation.
 New Delhi, India
 
 </samp>
-
-<details>
-<summary><samp>how this page builds itself</samp></summary>
-
-<br>
-
-Every graphic here is drawn by [`scripts/generate_stats.py`](scripts/generate_stats.py) inside this
-repository and committed as a static SVG — no third-party card service, so there is no host that
-can rate-limit it, restyle it, or go down and leave a broken image on the one page where that
-costs most. The prose regenerates too: the focus list and activity feed above are spliced into
-this file by the same script.
-
-Three decisions worth stealing:
-
-- **Whole-UTC-day query window.** Left alone, `contributionsCollection` measures a year back from
-  the instant of the request, so two runs minutes apart bucket boundary days differently and the
-  output churns forever. Pinning to `00:00:00Z` makes a day's output a pure function of that day's
-  data.
-- **Every glyph in the portrait carries an explicit `x`.** Relying on the font's 0.600em advance
-  means a visitor who falls back to Consolas (~0.55em) sees the whole thing 7% narrow and sheared.
-- **Two portraits, not one.** A dense glyph is *more ink* — darker on white, brighter on black. The
-  same ASCII is a photographic negative depending on theme, and density is baked into the
-  characters, so no CSS can fix it after the fact. A `<picture>` element does the swapping.
-
-<samp>[generate_stats.py](scripts/generate_stats.py) · [portrait.py](scripts/portrait.py) · [the workflow](.github/workflows/refresh-stats.yml)</samp>
-
-</details>
