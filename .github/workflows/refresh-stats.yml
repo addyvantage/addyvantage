@@ -1,0 +1,54 @@
+name: refresh stats
+
+on:
+  schedule:
+    # 05:17 UTC — off the hour, because everyone's cron fires on it and the
+    # queue at :00 is long.
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+  # Deliberately no `push` trigger. This job pushes a commit, and a push
+  # trigger would then re-run it on its own commit.
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-stats
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # No pip install step: the generator is standard library only, so there
+      # is no dependency that can publish a bad release at 03:00 and take the
+      # profile down with it.
+      - name: Draw the graphics
+        env:
+          # The built-in token returns the same numbers as a PAT here. Only
+          # swap in a PAT if you want private contributions counted — and note
+          # that doing so makes local runs and CI runs disagree.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_LOGIN: ${{ github.repository_owner }}
+          # THEME=card if you want each graphic to carry its own background.
+          THEME: auto
+        run: python3 scripts/generate_stats.py
+
+      - name: Commit only if something changed
+        run: |
+          FILES="stats.svg streak.svg langs.svg year.svg"
+          if [ -z "$(git status --porcelain -- $FILES)" ]; then
+            echo "No change."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- $FILES
+          git commit -m "stats: refresh"
+          git push

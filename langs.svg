@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="208" viewBox="0 0 860 208" role="img" aria-label="Language distribution" font-family="'JetBrains Mono','Liberation Mono','DejaVu Sans Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">
+<title>Language distribution</title>
+<style>.ink{fill:#1F2328;}.muted{fill:#59636E;}.accent{fill:#9A6700;}.rule{stroke:#D1D9E0;}.bar{fill:#9A6700;}.card{fill:#FFFFFF;stroke:#D1D9E0;}@media (prefers-color-scheme: dark){.ink{fill:#E6EDF3;}.muted{fill:#8B949E;}.accent{fill:#D29922;}.rule{stroke:#30363D;}.bar{fill:#D29922;}.card{fill:#0D1117;stroke:#30363D;}}</style>
+<g transform="translate(6,0)">
+<text x="0" y="14" class="muted" font-size="10" letter-spacing="1.4">BY BYTES OF CODE</text>
+<text x="0" y="50" class="ink" font-size="12" font-weight="400" text-anchor="start" >Python</text>
+<rect x="130.0" y="40.0" width="194.0" height="12" rx="1" class="bar" opacity="0.95"><animate attributeName="width" from="0" to="194.0" begin="0.00s" dur="0.55s" fill="freeze"/></rect>
+<text x="404.0" y="50" class="muted" font-size="11" font-weight="400" text-anchor="end" >74.2%</text>
+<text x="0" y="76" class="ink" font-size="12" font-weight="400" text-anchor="start" >TypeScript</text>
+<rect x="130.0" y="66.0" width="42.2" height="12" rx="1" class="bar" opacity="0.82"><animate attributeName="width" from="0" to="42.2" begin="0.07s" dur="0.55s" fill="freeze"/></rect>
+<text x="404.0" y="76" class="muted" font-size="11" font-weight="400" text-anchor="end" >16.1%</text>
+<text x="0" y="102" class="ink" font-size="12" font-weight="400" text-anchor="start" >Go</text>
+<rect x="130.0" y="92.0" width="12.1" height="12" rx="1" class="bar" opacity="0.69"><animate attributeName="width" from="0" to="12.1" begin="0.14s" dur="0.55s" fill="freeze"/></rect>
+<text x="404.0" y="102" class="muted" font-size="11" font-weight="400" text-anchor="end" >4.6%</text>
+<text x="0" y="128" class="ink" font-size="12" font-weight="400" text-anchor="start" >JavaScript</text>
+<rect x="130.0" y="118.0" width="10.8" height="12" rx="1" class="bar" opacity="0.56"><animate attributeName="width" from="0" to="10.8" begin="0.21s" dur="0.55s" fill="freeze"/></rect>
+<text x="404.0" y="128" class="muted" font-size="11" font-weight="400" text-anchor="end" >4.1%</text>
+<text x="0" y="154" class="ink" font-size="12" font-weight="400" text-anchor="start" >C</text>
+<rect x="130.0" y="144.0" width="1.8" height="12" rx="1" class="bar" opacity="0.43"><animate attributeName="width" from="0" to="1.8" begin="0.28s" dur="0.55s" fill="freeze"/></rect>
+<text x="404.0" y="154" class="muted" font-size="11" font-weight="400" text-anchor="end" >0.7%</text>
+<text x="0" y="180" class="ink" font-size="12" font-weight="400" text-anchor="start" >Cython</text>
+<rect x="130.0" y="170.0" width="0.6" height="12" rx="1" class="bar" opacity="0.30"><animate attributeName="width" from="0" to="0.6" begin="0.35s" dur="0.55s" fill="freeze"/></rect>
+<text x="404.0" y="180" class="muted" font-size="11" font-weight="400" text-anchor="end" >0.2%</text>
+<text x="444.0" y="14" class="muted" font-size="10" letter-spacing="1.4">BY REPOSITORY</text>
+<text x="444.0" y="50" class="ink" font-size="12" font-weight="400" text-anchor="start" >TypeScript</text>
+<rect x="574.0" y="40.0" width="194.0" height="12" rx="1" class="bar" opacity="0.95"><animate attributeName="width" from="0" to="194.0" begin="0.00s" dur="0.55s" fill="freeze"/></rect>
+<text x="848.0" y="50" class="muted" font-size="11" font-weight="400" text-anchor="end" >11 repos</text>
+<text x="444.0" y="76" class="ink" font-size="12" font-weight="400" text-anchor="start" >Python</text>
+<rect x="574.0" y="66.0" width="105.8" height="12" rx="1" class="bar" opacity="0.82"><animate attributeName="width" from="0" to="105.8" begin="0.07s" dur="0.55s" fill="freeze"/></rect>
+<text x="848.0" y="76" class="muted" font-size="11" font-weight="400" text-anchor="end" >6 repos</text>
+<text x="444.0" y="102" class="ink" font-size="12" font-weight="400" text-anchor="start" >Go</text>
+<rect x="574.0" y="92.0" width="17.6" height="12" rx="1" class="bar" opacity="0.69"><animate attributeName="width" from="0" to="17.6" begin="0.14s" dur="0.55s" fill="freeze"/></rect>
+<text x="848.0" y="102" class="muted" font-size="11" font-weight="400" text-anchor="end" >1 repo</text>
+<text x="444.0" y="128" class="ink" font-size="12" font-weight="400" text-anchor="start" >Jupyter Notebook</text>
+<rect x="574.0" y="118.0" width="17.6" height="12" rx="1" class="bar" opacity="0.56"><animate attributeName="width" from="0" to="17.6" begin="0.21s" dur="0.55s" fill="freeze"/></rect>
+<text x="848.0" y="128" class="muted" font-size="11" font-weight="400" text-anchor="end" >1 repo</text>
+<line x1="424" y1="6" x2="424" y2="202" class="rule" stroke-width="1"/>
+</g></svg>
