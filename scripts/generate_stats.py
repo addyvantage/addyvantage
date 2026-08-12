@@ -471,12 +471,24 @@ def draw_year(days: list[tuple[str, int]]) -> None:
     """
     One character per day, on the portrait's ramp.
 
+    Two things this has to get right, both learned the hard way:
+
+    · The cell must match the glyph. A monospace advance is 0.600em, so a
+      12px font in a 14px cell leaves every character hugging the left of a
+      double-wide box and the calendar reads as scattered dust. cell_w is
+      derived from size here rather than picked.
+    · Empty days need a mark. Drawing nothing for a zero-contribution day
+      removes the grid the eye reads position against, so a quiet autumn
+      looks like a rendering failure rather than a quiet autumn.
+
     Every glyph is positioned explicitly via an x-list rather than relying on
     the font's advance width, so the grid is exact even on a machine that
-    falls back to Consolas (0.55em) instead of the 0.600em the layout assumes.
+    falls back to Consolas (0.55em) instead of the 0.600em assumed here.
     """
-    cell_w, cell_h, size = 14.0, 15.0, 12
-    left, top = 26.0, 34.0
+    size = 15
+    cell_w = size * 0.600 * 1.10      # 10% air, no more
+    cell_h = 16.0
+    left, top = 30.0, 40.0
 
     weeks: list[list[tuple[str, int]]] = []
     first_weekday = datetime.strptime(days[0][0], "%Y-%m-%d").weekday()
@@ -490,25 +502,22 @@ def draw_year(days: list[tuple[str, int]]) -> None:
     if week:
         weeks.append(week + [("", -1)] * (7 - len(week)))
 
-    w = int(left + len(weeks) * cell_w + 10) + 2 * PAD
-    h = int(top + 7 * cell_h + 26)
-    counts = sorted({c for _, c in days if c > 0})
-    # Basic-latin subset rather than the 13-glyph ramp: this graphic also
-    # draws month ticks, weekday labels and a legend, and a ramp-only font
-    # would drop them to a system fallback mid-graphic.
+    grid_right = left + len(weeks) * cell_w
+    w = WIDTH
+    h = int(top + 7 * cell_h + 34)
+    counts = sorted(c for _, c in days if c > 0)
     fonts = inline_font("mono-regular.woff2", "JetBrains Mono", 400)
     p = svg_open(w, h, "Contribution calendar, one character per day", fonts=fonts)
 
     def glyph(count: int) -> str:
         if count <= 0:
             return " "
-        if not counts:
-            return RAMP[-1]
+        # Rank against the distribution rather than the maximum: one 40-commit
+        # day would otherwise flatten every ordinary day onto the same glyph.
         rank = sum(1 for c in counts if c <= count) / len(counts)
-        idx = 1 + int(rank * (len(RAMP) - 2))
-        return RAMP[min(idx, len(RAMP) - 1)]
+        return RAMP[min(1 + int(rank * (len(RAMP) - 2)), len(RAMP) - 1)]
 
-    # Month ticks
+    # Month ticks, at the first week that contains that month's opening days.
     seen = set()
     for wi, wk in enumerate(weeks):
         for date, _ in wk:
@@ -519,31 +528,65 @@ def draw_year(days: list[tuple[str, int]]) -> None:
             if dt.day <= 7 and key not in seen:
                 seen.add(key)
                 p.append(
-                    f'<text x="{left + wi * cell_w:.1f}" y="{top - 12}" class="muted" '
-                    f'font-size="10" letter-spacing="0.5">{dt.strftime("%b").upper()}</text>'
+                    f'<text x="{left + wi * cell_w:.1f}" y="{top - 14}" class="muted" '
+                    f'font-size="9" letter-spacing="1">{dt.strftime("%b").upper()}</text>'
                 )
             break
 
+    names = {1: "Mon", 3: "Wed", 5: "Fri"}
     for row in range(7):
-        xs, chars = [], []
+        xs, active, empty = [], [], []
         for wi, wk in enumerate(weeks):
             date, count = wk[row]
             xs.append(f"{left + wi * cell_w:.1f}")
-            chars.append(glyph(count) if date else " ")
+            g = glyph(count) if date else " "
+            active.append(g)
+            # The faint layer carries every day the ramp layer left blank, so
+            # the seven rows stay legible as rows.
+            empty.append("\u00b7" if (date and count <= 0) else " ")
         y = top + row * cell_h
-        if row in (1, 3, 5):
-            names = {1: "Mon", 3: "Wed", 5: "Fri"}
+        xlist = " ".join(xs)
+        if row in names:
             p.append(
                 f'<text x="0" y="{y:.1f}" class="muted" font-size="9">{names[row]}</text>'
             )
         p.append(
-            f'<text x="{" ".join(xs)}" y="{y:.1f}" class="accent" font-size="{size}" '
-            f'xml:space="preserve">{escape("".join(chars))}</text>'
+            f'<text x="{xlist}" y="{y:.1f}" class="muted" font-size="{size}" '
+            f'opacity="0.28" xml:space="preserve">{escape("".join(empty))}</text>'
+        )
+        p.append(
+            f'<text x="{xlist}" y="{y:.1f}" class="accent" font-size="{size}" '
+            f'xml:space="preserve">{escape("".join(active))}</text>'
         )
 
-    legend_y = h - 8
+    # Right-hand panel: the three facts a calendar makes you squint to find.
+    active_days = [(d, c) for d, c in days if c > 0]
+    busiest = max(days, key=lambda dc: dc[1])
+    quiet_run = run = 0
+    for _, c in days:
+        run = run + 1 if c == 0 else 0
+        quiet_run = max(quiet_run, run)
+    median = sorted(c for _, c in active_days)[len(active_days) // 2] if active_days else 0
+
+    px = grid_right + 34
+    if px < W - 150:
+        rows = [
+            ("busiest day", f"{busiest[1]} on {pretty(busiest[0])[:6]}"),
+            ("typical active day", f"{median} contributions"),
+            ("longest quiet run", f"{quiet_run} days"),
+        ]
+        p.append(
+            f'<line x1="{px - 18:.0f}" y1="{top - 26:.0f}" x2="{px - 18:.0f}" '
+            f'y2="{top + 7 * cell_h - 4:.0f}" class="rule" stroke-width="1"/>'
+        )
+        yy = top - 14
+        for cap, val in rows:
+            p.append(label(px, yy, cap))
+            p.append(text(px, yy + 17, val, cls="ink", size=12))
+            yy += 38
+
     p.append(
-        f'<text x="{left}" y="{legend_y}" class="muted" font-size="9" '
+        f'<text x="{left}" y="{h - 10}" class="muted" font-size="9" '
         f'xml:space="preserve">quiet<tspan class="accent" font-size="11" '
         f'letter-spacing="3" dx="10">{escape(RAMP[1:])}</tspan>'
         f'<tspan class="muted" font-size="9" dx="4">loud</tspan></text>'

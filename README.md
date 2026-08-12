@@ -100,15 +100,11 @@ New Delhi, India
 
 </samp>
 
-<br>
+---
 
-<sub>
-
-Every graphic on this page is drawn by [`scripts/generate_stats.py`](scripts/generate_stats.py)
-inside this repository and committed as a static SVG. Nothing here is fetched from a
-third-party card service, so there is no host that can rate-limit it, restyle it, or
-go down and leave a broken image on the one page where that costs most. The numbers
-come from the GitHub GraphQL API on a whole-day window, which makes a given day's
-output a pure function of that day's data.
-
-</sub>
+> Every graphic on this page is drawn by [`scripts/generate_stats.py`](scripts/generate_stats.py) inside
+> this repository and committed as a static SVG. Nothing is fetched from a third-party card
+> service, so there is no host that can rate-limit it, restyle it, or go down and leave a
+> broken image on the one page where that costs most. The numbers come from the GitHub
+> GraphQL API on a whole-day window, which makes a given day's output a pure function of
+> that day's data.
