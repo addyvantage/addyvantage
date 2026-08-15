@@ -155,8 +155,8 @@ pricing in simulation.
 <br>
 
 <!-- AUTOGEN:activity:start -->
-- pushed to [`addyvantage/addyvantage`](https://github.com/addyvantage/addyvantage) · yesterday
-- opened issue [#44823](https://github.com/timburgan/timburgan/issues/44823) in [`timburgan/timburgan`](https://github.com/timburgan/timburgan) · yesterday
+- pushed to [`addyvantage/addyvantage`](https://github.com/addyvantage/addyvantage) · 2d ago
+- opened issue [#44823](https://github.com/timburgan/timburgan/issues/44823) in [`timburgan/timburgan`](https://github.com/timburgan/timburgan) · 2d ago
 <!-- AUTOGEN:activity:end -->
 
 </details>
