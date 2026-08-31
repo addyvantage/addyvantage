@@ -144,9 +144,9 @@ pricing in simulation.
 **Where the commits are actually landing** — the three repositories I touched most recently.
 
 <!-- AUTOGEN:focus:start -->
+- **[axedstack-website](https://github.com/addyvantage/axedstack-website)**  <samp>TypeScript · 0★</samp>
 - **[addyvantage](https://github.com/addyvantage/addyvantage)**  <samp>Python · 0★</samp>
 - **[TracePack](https://github.com/addyvantage/TracePack)**  <samp>TypeScript · 0★</samp>
-- **[smoke-break](https://github.com/addyvantage/smoke-break)**  <samp>Python · 0★</samp>
 <!-- AUTOGEN:focus:end -->
 
 <details>
@@ -155,8 +155,9 @@ pricing in simulation.
 <br>
 
 <!-- AUTOGEN:activity:start -->
-- pushed to [`addyvantage/addyvantage`](https://github.com/addyvantage/addyvantage) · 17d ago
-- opened issue [#44823](https://github.com/timburgan/timburgan/issues/44823) in [`timburgan/timburgan`](https://github.com/timburgan/timburgan) · 17d ago
+- pushed to [`addyvantage/axedstack-website`](https://github.com/addyvantage/axedstack-website) · today
+- pushed to [`addyvantage/addyvantage`](https://github.com/addyvantage/addyvantage) · 18d ago
+- opened issue [#44823](https://github.com/timburgan/timburgan/issues/44823) in [`timburgan/timburgan`](https://github.com/timburgan/timburgan) · 18d ago
 <!-- AUTOGEN:activity:end -->
 
 </details>
