@@ -144,9 +144,9 @@ pricing in simulation.
 **Where the commits are actually landing** — the three repositories I touched most recently.
 
 <!-- AUTOGEN:focus:start -->
+- **[assurance-compiler](https://github.com/addyvantage/assurance-compiler)**  <samp>TypeScript · 0★</samp>
 - **[addyvantage](https://github.com/addyvantage/addyvantage)**  <samp>Python · 0★</samp>
 - **[axedstack-website](https://github.com/addyvantage/axedstack-website)**  <samp>TypeScript · 0★</samp>
-- **[TracePack](https://github.com/addyvantage/TracePack)**  <samp>TypeScript · 0★</samp>
 <!-- AUTOGEN:focus:end -->
 
 <details>
@@ -155,7 +155,9 @@ pricing in simulation.
 <br>
 
 <!-- AUTOGEN:activity:start -->
-- pushed to [`addyvantage/axedstack-website`](https://github.com/addyvantage/axedstack-website) · 12d ago
+- pushed to [`addyvantage/assurance-compiler`](https://github.com/addyvantage/assurance-compiler) · today
+- opened PR [#3](https://github.com/addyvantage/assurance-compiler/pull/3) in [`addyvantage/assurance-compiler`](https://github.com/addyvantage/assurance-compiler) · today
+- pushed to [`addyvantage/axedstack-website`](https://github.com/addyvantage/axedstack-website) · 13d ago
 <!-- AUTOGEN:activity:end -->
 
 </details>
