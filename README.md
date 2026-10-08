@@ -155,10 +155,10 @@ pricing in simulation.
 <br>
 
 <!-- AUTOGEN:activity:start -->
-- pushed to [`addyvantage/addyvantage-website`](https://github.com/addyvantage/addyvantage-website) · 7d ago
-- merged PR [#4](https://github.com/addyvantage/addyvantage-website/pull/4) in [`addyvantage/addyvantage-website`](https://github.com/addyvantage/addyvantage-website) · 10d ago
-- pushed to [`addyvantage/assurance-compiler`](https://github.com/addyvantage/assurance-compiler) · 24d ago
-- opened PR [#3](https://github.com/addyvantage/assurance-compiler/pull/3) in [`addyvantage/assurance-compiler`](https://github.com/addyvantage/assurance-compiler) · 24d ago
+- pushed to [`addyvantage/addyvantage-website`](https://github.com/addyvantage/addyvantage-website) · 8d ago
+- merged PR [#4](https://github.com/addyvantage/addyvantage-website/pull/4) in [`addyvantage/addyvantage-website`](https://github.com/addyvantage/addyvantage-website) · 11d ago
+- pushed to [`addyvantage/assurance-compiler`](https://github.com/addyvantage/assurance-compiler) · 25d ago
+- opened PR [#3](https://github.com/addyvantage/assurance-compiler/pull/3) in [`addyvantage/assurance-compiler`](https://github.com/addyvantage/assurance-compiler) · 25d ago
 <!-- AUTOGEN:activity:end -->
 
 </details>
