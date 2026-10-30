@@ -155,7 +155,7 @@ pricing in simulation.
 <br>
 
 <!-- AUTOGEN:activity:start -->
-- pushed to [`addyvantage/addyvantage-website`](https://github.com/addyvantage/addyvantage-website) · 29d ago
+- Quiet week — heads down on something that isn't public yet.
 <!-- AUTOGEN:activity:end -->
 
 </details>
